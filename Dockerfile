@@ -10,4 +10,5 @@ RUN CGO_ENABLED=0 GOOS=linux go build --ldflags "-s -w" -a -installsuffix cgo -o
 FROM scratch
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY --from=builder /go/src/github.com/serjs/socks5/socks5 /
+
 ENTRYPOINT ["/socks5"]

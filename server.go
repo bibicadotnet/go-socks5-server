@@ -1,9 +1,11 @@
 package main
 
 import (
+	"context"
 	"log"
 	"net"
 	"os"
+	"time"
 
 	"github.com/armon/go-socks5"
 	"github.com/caarlos0/env/v6"
@@ -15,6 +17,7 @@ type params struct {
 	Port            string    `env:"PROXY_PORT" envDefault:"1080"`
 	AllowedDestFqdn string    `env:"ALLOWED_DEST_FQDN" envDefault:""`
 	AllowedIPs      []string  `env:"ALLOWED_IPS" envSeparator:"," envDefault:""`
+	Timeout  time.Duration `env:"DIAL_TIMEOUT" envDefault:"3s"`
 }
 
 func main() {
@@ -28,6 +31,12 @@ func main() {
 	//Initialize socks5 config
 	socks5conf := &socks5.Config{
 		Logger: log.New(os.Stdout, "", log.LstdFlags),
+		Dial: func(ctx context.Context, network, addr string) (net.Conn, error) {
+			d := net.Dialer{
+				Timeout: cfg.Timeout,
+			}
+			return d.DialContext(ctx, network, addr)
+		},
 	}
 
 	if cfg.User+cfg.Password != "" {

@@ -1,6 +1,5 @@
 ARG GOLANG_VERSION="1.19.1"
-
-FROM golang:$GOLANG_VERSION-alpine as builder
+FROM golang:$GOLANG_VERSION-alpine AS builder
 
 # Cài đặt các phụ thuộc cần thiết
 RUN apk --no-cache add tzdata git
@@ -13,13 +12,14 @@ COPY . .
 
 # Build ứng dụng với các cờ tối ưu và tắt debug
 RUN CGO_ENABLED=0 GOOS=linux go build \
-    -ldflags "-s -w -X main.disableLogs=true" \  # Truyền cờ tắt log qua biến build-time
+    -ldflags "-s -w -X main.disableLogs=true" \
     -a -installsuffix cgo \
     -o socks5 .
 
 # Giai đoạn runtime
 FROM scratch
+
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
-COPY --from=builder /app/socks5 /  # Sửa đường dẫn đúng vị trí build
+COPY --from=builder /app/socks5 /
 
 ENTRYPOINT ["/socks5"]

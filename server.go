@@ -2,6 +2,8 @@ package main
 
 import (
 	"context"
+	"io"
+	"log"
 	"net"
 	"os"
 	"time"
@@ -21,12 +23,17 @@ type params struct {
 }
 
 func main() {
+	// Tắt hoàn toàn logging bằng cách redirect output đến /dev/null
+	log.SetOutput(io.Discard)
+	
 	cfg := params{}
 	if err := env.Parse(&cfg); err != nil {
 		os.Exit(1)
 	}
 
 	socks5conf := &socks5.Config{
+		// Tắt logger của socks5
+		Logger: log.New(io.Discard, "", 0),
 		Dial: func(ctx context.Context, network, addr string) (net.Conn, error) {
 			d := net.Dialer{Timeout: cfg.Timeout}
 			return d.DialContext(ctx, network, addr)

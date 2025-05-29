@@ -16,9 +16,9 @@ Việc cài đặt, xác thực người dùng, tùy chỉnh các port, sử d�
 
 Ngoài chuyện nó lưu lại ngày giờ và IP kết nối tới socks, tần xuất logs `[INFO]` này xuất hiện ở cường độ rất cao, tầm 1s/1 lần, logs rác như thế không hiểu sao tác giả không xóa đi cho nhẹ VPS?
 
-Phiên bản bạn thấy ở đây, mình dùng từ bản `bobpaul/go-socks5-server`, sau đó xóa sạch tất cả các logs hệ thống, còn lại cũng chẳng biết gì mà sửa, cấu hình, sửa dụng, tương tư phiên bản gốc
+Phiên bản bạn thấy ở đây, dùng từ bản `bobpaul/go-socks5-server`, sau đó xóa sạch tất cả các logs hệ thống, còn lại cũng chẳng biết gì mà sửa, cấu hình, sử dụng, tương tư phiên bản gốc
 
-- Sử dụng thực tế, cấu hình nhanh qua docker `compose.yml`
+- Cấu hình sử dụng nhanh qua docker `compose.yml`
 
 ```compose.yml
 services:

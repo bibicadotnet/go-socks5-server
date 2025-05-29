@@ -1,4 +1,4 @@
-# SOCKS5 Proxy Server với log tắt mặc định
+# SOCKS5 Proxy Server với logs tắt mặc định
 
 Máy chủ SOCKS5 đơn giản dựa trên go-socks5 với:
 - Xác thực người dùng
@@ -46,9 +46,20 @@ docker compose up -d
 
 ```
 curl --socks5 myusername:mypassword@localhost:12821 http://ifconfig.me
+
+Hoặc
+
+curl --socks5 myusername:mypassword@localhost:12821 http://httpbin.org/ip
+
 ```
 
 Thấy hiện ra được IP của VPS là chính xác
+
+- Kết nối sử dụng
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/bibicadotnet/go-socks5-server-silent/refs/heads/merge_requests/img/2025-05-29_13-40-48.png" alt="Ảnh minh hoạ" />
+</p>
 
 - Tùy chỉnh port
 
@@ -60,8 +71,12 @@ Tác giả serjs dùng port SOCKS tiêu chuẩn `1080`, chủ yếu cũng do th�
 
 Theo cấu hình ví dụ ở trên, __mở port `12821` trên VPS là được__
 
-- Kiểm tra logs hệ thống
+### __Kiểm tra logs hệ thống__
   
 ```
+curl --socks5 myusername:mypassword@localhost:12821 http://ifconfig.me
 docker logs socks5
 ```
+Không thấy logs nào hiện ra là đúng
+
+Ở phiên bản gốc bạn sẽ thấy khá nhiều logs rác tại đây, bản silent này mình tắt sẵn, đỡ phải ghi quá nhiều thông tin xuống ổ cứng, gây nặng khi chạy ở thời gian dài, cũng giúp người dùng đỡ lấn cấn vấn đề VPS ghi lại IP của người sử dụng

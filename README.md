@@ -6,6 +6,19 @@ Máy chủ SOCKS5 đơn giản dựa trên go-socks5 với:
 - Lọc FQDN đích
 - **TẮT TOÀN BỘ LOG HỆ THỐNG MẶC ĐỊNH**
 
+Có rất nhiều phiên bản socks5 trên Github, đặc biệt là các phiên bản của người Trung Quốc viết ra, hiệu năng bố đời, chạy cực nhẹ, chịu tải cao
+
+Ở góc độ người dùng cuối tại Việt Nam, thường mục đích chính mở chặn các trang bị nhà mạng khóa, dùng các phiên bản socks5 đơn giản, hỗ trợ xác thực người dùng là đủ, đỡ phải mất thời gian tìm hiểu nhiều
+
+Lượn lờ thì mình thấy bản go-socks5-proxy từ serjs có lượt kéo về hàng đầu trên [docker hub](https://hub.docker.com/r/serjs/go-socks5-proxy)
+
+Việc cài đặt, xác thực người dùng, sử dụng đơn giản như mong đợi, thứ duy nhất mình khó chịu, là tác giả vẫn duy trì, giữ lại 1 số thông báo `[INFO]` từ hệ thống, kiểu `2025/05/28 10:57:54 [INFO] socks: Connection from allowed IP address: 212.179.155.163`
+
+Ngoài chuyện nó lưu lại ngày giờ và IP 1 kết nối tới socks, tần xuất `[INFO]` này lưu lại gần như là liên tục
+
+
+
+
 ## Cách sử dụng
 
 ### Chạy Docker container

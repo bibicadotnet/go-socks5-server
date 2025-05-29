@@ -10,7 +10,8 @@ Máy chủ SOCKS5 đơn giản dựa trên go-socks5 với:
 ```
 wget -qO socks5.sh https://go.bibica.net/telegram-socks5 && sudo bash socks5.sh
 ```
-## Rảnh thì lúc này có thể đọc lời dẫn và hướng dẫn
+## Rảnh thì lúc này có thể đọc lời dẫn và hướng dẫn bên dưới
+
 Có rất nhiều phiên bản socks5 trên Github, đặc biệt là các phiên bản của người Trung Quốc viết ra, hiệu năng bố đời, chạy cực nhẹ, chịu tải cao
 
 Ở góc độ người dùng cuối tại Việt Nam, thường mục đích chính mở chặn các trang bị [nhà mạng khóa](https://bibica.net/giai-quyet-telegram-bi-nha-mang-viet-nam-chan-bang-mtproto-socks5-proton-vpn/), dùng các phiên bản socks5 đơn giản, **hỗ trợ xác thực người dùng, tùy chỉnh các port được là đủ**, đỡ phải mất thời gian tìm hiểu nhiều

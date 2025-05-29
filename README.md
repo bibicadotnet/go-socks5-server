@@ -86,3 +86,7 @@ docker logs socks5
 - Không thấy logs nào hiện ra là đúng
 
 - Ở phiên bản gốc bạn sẽ thấy khá nhiều logs rác tại đây, bản silent này tắt sẵn, đỡ phải ghi quá nhiều thông tin xuống ổ cứng, gây nặng khi chạy ở thời gian dài, cũng giúp người dùng đỡ lấn cấn vấn đề VPS ghi lại IP của người sử dụng
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/bibicadotnet/go-socks5-server-silent/refs/heads/merge_requests/img/2025-05-29_17-16-27.png" alt="I/O" />
+</p>

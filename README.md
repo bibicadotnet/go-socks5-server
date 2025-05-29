@@ -8,90 +8,54 @@ Máy chủ SOCKS5 đơn giản dựa trên go-socks5 với:
 
 Có rất nhiều phiên bản socks5 trên Github, đặc biệt là các phiên bản của người Trung Quốc viết ra, hiệu năng bố đời, chạy cực nhẹ, chịu tải cao
 
-Ở góc độ người dùng cuối tại Việt Nam, thường mục đích chính mở chặn các trang bị nhà mạng khóa, dùng các phiên bản socks5 đơn giản, hỗ trợ xác thực người dùng là đủ, đỡ phải mất thời gian tìm hiểu nhiều
+Ở góc độ người dùng cuối tại Việt Nam, thường mục đích chính mở chặn các trang bị [nhà mạng khóa](https://bibica.net/giai-quyet-telegram-bi-nha-mang-viet-nam-chan-bang-mtproto-socks5-proton-vpn/), dùng các phiên bản socks5 đơn giản, **hỗ trợ xác thực người dùng, tùy chỉnh các port được là đủ**, đỡ phải mất thời gian tìm hiểu nhiều
 
-Lượn lờ thì mình thấy bản go-socks5-proxy từ serjs có lượt kéo về hàng đầu trên [docker hub](https://hub.docker.com/r/serjs/go-socks5-proxy)
+Lượn lờ thì mình thấy bản go-socks5-proxy từ serjs có lượt kéo về hàng đầu trên [docker hub](https://hub.docker.com/r/serjs/go-socks5-proxy) (hơn 10 triệu lượt)
 
-Việc cài đặt, xác thực người dùng, sử dụng đơn giản như mong đợi, thứ duy nhất mình khó chịu, là tác giả vẫn duy trì, giữ lại 1 số thông báo `[INFO]` từ hệ thống, kiểu `2025/05/28 10:57:54 [INFO] socks: Connection from allowed IP address: 212.179.155.163`
+Việc cài đặt, xác thực người dùng, tùy chỉnh các port, sử dụng đơn giản như mong đợi, thứ duy nhất mình khó chịu, là tác giả vẫn duy trì, giữ lại 1 số thông báo `[INFO]` từ hệ thống, kiểu `2025/05/28 10:57:54 [INFO] socks: Connection from allowed IP address: 212.179.155.163`
 
-Ngoài chuyện nó lưu lại ngày giờ và IP 1 kết nối tới socks, tần xuất `[INFO]` này lưu lại gần như là liên tục
+Ngoài chuyện nó lưu lại ngày giờ và IP kết nối tới socks, tần xuất logs `[INFO]` này xuất hiện ở cường độ rất cao, tầm 1s/1 lần, logs rác như thế không hiểu sao tác giả không xóa đi cho nhẹ VPS?
 
+Phiên bản bạn thấy ở đây, mình dùng từ bản `bobpaul/go-socks5-server`, sau đó xóa sạch tất cả các logs hệ thống, còn lại cũng chẳng biết gì mà sửa, cấu hình, sửa dụng, tương tư phiên bản gốc
 
+- Sử dụng thực tế thì cấu hình nhanh qua docker `compose.yml`
 
+```compose.yml
+services:
+  socks5:
+    image: bibica/go-socks5-server-silent:latest  # Image SOCKS5
+    container_name: socks5                        # Tên container
+    restart: always                              # Tự động khởi động lại
+    environment:
+      - PROXY_USER=myusername                    # Username SOCKS5
+      - PROXY_PASSWORD=mypassword                # Password SOCKS5
+      - PROXY_PORT=7128                          # Port chạy trong container
+    ports:
+      - "12821:7128"                             # Port host → container
 
-## Cách sử dụng
-
-### Chạy Docker container
-
-1. **Với xác thực đơn giản**:
-   ```bash
-   docker run -d --name socks5 -p 1080:1080 \
-     -e PROXY_USER=<TÊN_NGƯỜI_DÙNG> \
-     -e PROXY_PASSWORD=<MẬT_KHẨU> \
-     bibica/go-socks5-server-silent
-   ```
-
-2. **Không yêu cầu xác thực**:
-   ```bash
-   docker run -d --name socks5 -p 1090:9090 \
-     -e PROXY_PORT=9090 \
-     bibica/go-socks5-server-silent
-   ```
-
-3. **Xác thực nhiều người dùng**:
-   ```bash
-   docker run -d --name socks5 -p 1080:1080 \
-     -e PROXY_CREDENTIALS='[{"username":"USER1","password":"pass1"},{"username":"USER2","password":"pass2"}]' \
-     bibica/go-socks5-server-silent
-   ```
-
-## Danh sách cấu hình hỗ trợ
-
-| Biến môi trường       | Kiểu dữ liệu | Mặc định | Mô tả |
-|-----------------------|-------------|----------|-------|
-| DIAL_TIMEOUT          | String      | 3s       | Thời gian chờ kết nối |
-| PROXY_CREDENTIALS     | JSON        | EMPTY    | Danh sách user/password dạng JSON |
-| PROXY_USER            | String      | EMPTY    | Tên người dùng (yêu cầu PROXY_PASSWORD) |
-| PROXY_PASSWORD        | String      | EMPTY    | Mật khẩu xác thực |
-| PROXY_PORT            | String      | 1080     | Cổng lắng nghe trong container |
-| ALLOWED_DEST_FQDN     | String      | EMPTY    | Regex cho phép FQDN đích |
-| ALLOWED_IPS           | String      | EMPTY    | Danh sách IP được phép kết nối, phân cách bằng dấu phẩy |
-
-**Lưu ý đặc biệt**: Phiên bản silent này đã tắt toàn bộ log hệ thống mặc định để đảm bảo hoạt động tối ưu và bảo mật.
-
-## Xây dựng image tùy chỉnh
-
-```bash
-docker-compose up --build -d
 ```
-Cấu hình các tham số trong file .env khi cần thiết
+Đổi lại thông tin `myusername` `mypassword`
 
-## Kiểm tra hoạt động
+- Bật chạy
 
-1. **Không xác thực**:
-   ```bash
-   curl --socks5 <IP_DOCKER_HOST>:1080 https://ifcfg.co
-   ```
-   hoặc
-   ```bash
-   docker run --rm curlimages/curl:7.65.3 -s --socks5 <IP_DOCKER_HOST>:1080 https://ifcfg.co
-   ```
+```
+docker compose up -d
+```
 
-2. **Có xác thực**:
-   ```bash
-   curl --socks5 <IP_DOCKER_HOST>:1080 -U <USER>:<MẬT_KHẨU> http://ifcfg.co
-   ```
-   hoặc
-   ```bash
-   docker run --rm curlimages/curl:7.65.3 -s --socks5 <USER>:<MẬT_KHẨU>@<IP_DOCKER_HOST>:1080 http://ifcfg.co
-   ```
+- Kiểm tra xác thực tài khoản:
 
-## Tác giả
+```
+curl --socks5 myusername:mypassword@localhost:12821 http://ifconfig.me
+```
 
-- **Sergey Bogayrets** (Phiên bản gốc)
-  
-## Người đóng góp
-  
-- **[bobpaul](https://github.com/bobpaul/go-socks5-server)**
+Thấy hiện ra được IP của VPS là chính xác
 
-Xem thêm danh sách [người đóng góp](https://github.com/bibica/go-socks5-server-silent/graphs/contributors) cho dự án này.
+- Tùy chỉnh port
+
+Ví dụ trên mình dùng 1 port khá ngẫu nhiên là `12821`, tránh trùng tới các port có sẵn của hệ thống
+
+Về `PROXY_PORT=7128` bên trong container, bạn có thể đổi sang bất cứ port nào, không ảnh hưởng gì, miễn là ports mapping đúng (ví dụ: "12821:7128")
+
+Tác giả serjs dùng port SOCKS tiêu chuẩn `1080`, chủ yếu cũng do thói quen, một số người khác thích dùng port HTTPS tiêu chuẩn `443`, vì không hệ thống firewall nào mặc định đi chặn 443 cả, nó cũng tránh được việc soi ra đang dùng SOCKS hơn, có điều `443` thường mọi người hay chạy webserver, dùng 443 trên socks dễ bị trùng, gây lỗi
+
+Câu chuyện ở đây là bạn tự cài đặt trên VPS của riêng mình, dùng port nào tùy thích, theo cấu hình ví dụ ở trên, __mở port `12821` trên VPS là được__

@@ -77,6 +77,6 @@ Theo cấu hình ví dụ ở trên, __mở port `12821` trên VPS là được_
 curl --socks5 myusername:mypassword@localhost:12821 http://ifconfig.me
 docker logs socks5
 ```
-Không thấy logs nào hiện ra là đúng
+- Không thấy logs nào hiện ra là đúng
 
-Ở phiên bản gốc bạn sẽ thấy khá nhiều logs rác tại đây, bản silent này mình tắt sẵn, đỡ phải ghi quá nhiều thông tin xuống ổ cứng, gây nặng khi chạy ở thời gian dài, cũng giúp người dùng đỡ lấn cấn vấn đề VPS ghi lại IP của người sử dụng
+- Ở phiên bản gốc bạn sẽ thấy khá nhiều logs rác tại đây, bản silent này tắt sẵn, đỡ phải ghi quá nhiều thông tin xuống ổ cứng, gây nặng khi chạy ở thời gian dài, cũng giúp người dùng đỡ lấn cấn vấn đề VPS ghi lại IP của người sử dụng

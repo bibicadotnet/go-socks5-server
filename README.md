@@ -34,7 +34,7 @@ services:
       - "12821:7128"                             # Port host → container
 
 ```
-Đổi lại thông tin `myusername` `mypassword`
+Đổi lại thông tin tài khoản `myusername` `mypassword` hoặc port `12821` thành 1 số khác tùy thích
 
 - Bật chạy
 
@@ -58,4 +58,10 @@ Về `PROXY_PORT=7128` bên trong container, bạn có thể đổi sang bất c
 
 Tác giả serjs dùng port SOCKS tiêu chuẩn `1080`, chủ yếu cũng do thói quen, một số người khác thích dùng port HTTPS tiêu chuẩn `443`, vì không hệ thống firewall nào mặc định đi chặn 443 cả, nó cũng tránh được việc soi ra đang dùng SOCKS hơn, có điều `443` thường mọi người hay chạy webserver, dùng 443 trên socks dễ bị trùng, gây lỗi
 
-Câu chuyện ở đây là bạn tự cài đặt trên VPS của riêng mình, dùng port nào tùy thích, theo cấu hình ví dụ ở trên, __mở port `12821` trên VPS là được__
+Theo cấu hình ví dụ ở trên, __mở port `12821` trên VPS là được__
+
+- Kiểm tra logs hệ thống
+  
+```
+docker logs socks5
+```

@@ -10,9 +10,9 @@ Có rất nhiều phiên bản socks5 trên Github, đặc biệt là các phiê
 
 Ở góc độ người dùng cuối tại Việt Nam, thường mục đích chính mở chặn các trang bị [nhà mạng khóa](https://bibica.net/giai-quyet-telegram-bi-nha-mang-viet-nam-chan-bang-mtproto-socks5-proton-vpn/), dùng các phiên bản socks5 đơn giản, **hỗ trợ xác thực người dùng, tùy chỉnh các port được là đủ**, đỡ phải mất thời gian tìm hiểu nhiều
 
-Lượn lờ thì mình thấy bản go-socks5-proxy từ serjs có lượt kéo về hàng đầu trên [docker hub](https://hub.docker.com/r/serjs/go-socks5-proxy) (hơn 10 triệu lượt)
+Lượn lờ thì mình thấy bản `go-socks5-proxy` từ `serjs` có lượt kéo về hàng đầu trên [docker hub](https://hub.docker.com/r/serjs/go-socks5-proxy) (hơn 10 triệu lượt)
 
-Việc cài đặt, xác thực người dùng, tùy chỉnh các port, sử dụng đơn giản như mong đợi, thứ duy nhất mình khó chịu, là tác giả vẫn duy trì, giữ lại 1 số thông báo `[INFO]` từ hệ thống, kiểu `2025/05/28 10:57:54 [INFO] socks: Connection from allowed IP address: 212.179.155.163`
+Việc cài đặt, xác thực người dùng, tùy chỉnh các port, sử dụng đơn giản như mong đợi, thứ duy nhất khó chịu, là tác giả vẫn duy trì, giữ lại 1 số thông báo `[INFO]` từ hệ thống (https://github.com/serjs/socks5-server/issues/68), `2025/05/28 10:57:54 [INFO] socks: Connection from allowed IP address: 212.179.155.163`
 
 Ngoài chuyện nó lưu lại ngày giờ và IP kết nối tới socks, tần xuất logs `[INFO]` này xuất hiện ở cường độ rất cao, tầm 1s/1 lần, logs rác như thế không hiểu sao tác giả không xóa đi cho nhẹ VPS?
 
@@ -58,7 +58,7 @@ Thấy hiện ra được IP của VPS là chính xác
 - Kết nối sử dụng
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/bibicadotnet/go-socks5-server-silent/refs/heads/merge_requests/img/2025-05-29_13-40-48.png" alt="Ảnh minh hoạ" />
+  <img src="https://raw.githubusercontent.com/bibicadotnet/go-socks5-server-silent/refs/heads/merge_requests/img/2025-05-29_13-40-48.png" alt="Kết nối sử dụng" />
 </p>
 
 - Tùy chỉnh port

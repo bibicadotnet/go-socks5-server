@@ -18,7 +18,7 @@ Ngoài chuyện nó lưu lại ngày giờ và IP kết nối tới socks, tần
 
 Phiên bản bạn thấy ở đây, mình dùng từ bản `bobpaul/go-socks5-server`, sau đó xóa sạch tất cả các logs hệ thống, còn lại cũng chẳng biết gì mà sửa, cấu hình, sửa dụng, tương tư phiên bản gốc
 
-- Sử dụng thực tế thì cấu hình nhanh qua docker `compose.yml`
+- Sử dụng thực tế, cấu hình nhanh qua docker `compose.yml`
 
 ```compose.yml
 services:

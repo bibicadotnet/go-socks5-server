@@ -10,6 +10,21 @@ Máy chủ SOCKS5 đơn giản dựa trên go-socks5 với:
 ```
 wget -qO socks5.sh https://go.bibica.net/telegram-socks5 && sudo bash socks5.sh
 ```
+
+SOCKS5 Proxy Information nhanh gọn
+```
+========================================================================
+                Telegram Socks5 Silent Proxy Information
+    tg://socks?server=165.121.164.165&port=16554&user=rPXLEwZ4mzVo&pass=h18jPdIeWe36Fjd8
+========================================================================
+SOCKS5 Proxy Information:
+  Server IP: 165.121.164.165
+  Port: 16554
+  Username: rPXLEwZ4mzVo
+  Password: h18jPdIeWe36Fjd8
+Configuration directory: /root/go-socks5-server-silent
+```
+
 ## Rảnh thì lúc này có thể đọc lời dẫn và hướng dẫn bên dưới
 
 Có rất nhiều phiên bản socks5 trên Github, đặc biệt là các phiên bản của người Trung Quốc viết ra, hiệu năng bố đời, chạy cực nhẹ, chịu tải cao
